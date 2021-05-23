@@ -5,16 +5,16 @@ holderThickness = 10;
 holderZ = 20;
 
 /* Aquaris X */
-/* phoneHolderX = 80;
-phoneYDispl = 68;
-phoneY2 = 77; //with case
-phoneZ = 9; */
+phoneHolderX = 80;
+phoneYDispl = 69;
+phoneY2 = 78; //with case
+phoneZ = 9;
 
 /* Samsung Galaxy Tab2 */
-phoneHolderX = 160;
+/* phoneHolderX = 160;
 phoneYDispl = 168;
 phoneY2 = 175; //with case
-phoneZ = 7;
+phoneZ = 7; */
 
 
 phoneHolderWall = 2;
@@ -105,5 +105,7 @@ module phoneHolder()
   }
   translate([-holderThickness/2-railExtra,0,0]) rail();
 }
-translate([10.2,10,(holderZ-phoneZ-phoneHolderWall)/2+0.1]) phoneHolder();
+
+/* rail(); */
+/* translate([10.2,10,(holderZ-phoneZ-phoneHolderWall)/2+0.1]) phoneHolder(); */
 /* translate([-holderX,10,0]) CouchPotatoClamp(); */
