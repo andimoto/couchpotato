@@ -4,16 +4,25 @@ holderX = 120;
 holderThickness = 10;
 holderZ = 20;
 
-phoneHolderX = 80;
+/* Aquaris X */
+/* phoneHolderX = 80;
 phoneYDispl = 68;
 phoneY2 = 77; //with case
-phoneZ = 9;
+phoneZ = 9; */
+
+/* Samsung Galaxy Tab2 */
+phoneHolderX = 160;
+phoneYDispl = 168;
+phoneY2 = 175; //with case
+phoneZ = 7;
+
 
 phoneHolderWall = 2;
 
 railExtra = 1;
 railRad = 2;
 
+railExtr = 100; //fixed extrusion of rails in clamp
 
 module rail()
 {
@@ -44,8 +53,8 @@ module A()
     }
     moveRailX = holderX-holderThickness/2-railExtra;
     moveRailScale = 0;//(holderThickness/2+railExtra)*0.05;
-    translate([moveRailX-moveRailScale,0,(holderZ-phoneZ-phoneHolderWall)/2])
-      scale([1.05,1,1.05]) rail();
+    translate([moveRailX-moveRailScale,0,(holderZ)/2])
+      resize([0,100,0]) scale([1.05,1,1.05]) rail();
   }
 }
 
@@ -61,16 +70,24 @@ module CouchPotatoClamp()
   translate([0,30,13])
   union()
   {
-    rotate([-50,0,0])
-    translate([0,0,holderZ/2])
-    cube([holderThickness,10,holderZ*4]);
+    difference() {
+      rotate([-50,0,0])
+      translate([0,0,holderZ/2])
+      cube([holderThickness,10,holderZ*4]);
+      translate([0,0,-13]) cube([holderThickness,50,holderZ]);
+      translate([0,40,-13+holderZ*3]) cube([holderThickness,50,holderZ]);
+    }
   }
   translate([holderX-holderThickness,30,13])
   union()
   {
-    rotate([-50,0,0])
-    translate([0,0,holderZ/2])
-    cube([holderThickness,10,holderZ*4]);
+    difference() {
+      rotate([-50,0,0])
+      translate([0,0,holderZ/2])
+      cube([holderThickness,10,holderZ*4]);
+      translate([0,0,-13]) cube([holderThickness,50,holderZ]);
+      translate([0,40,-13+holderZ*3]) cube([holderThickness,50,holderZ]);
+    }
   }
 }
 /* A(); */
