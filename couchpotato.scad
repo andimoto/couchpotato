@@ -5,16 +5,16 @@ holderThickness = 10;
 holderZ = 20;
 
 /* Aquaris X */
-phoneHolderX = 80;
-phoneYDispl = 69;
+/* phoneHolderX = 80;
+phoneY = 69;
 phoneY2 = 78; //with case
-phoneZ = 9;
+phoneZ = 9; */
 
 /* Samsung Galaxy Tab2 */
-/* phoneHolderX = 160;
-phoneYDispl = 168;
-phoneY2 = 175; //with case
-phoneZ = 7; */
+phoneHolderX = 100;
+phoneY = 166;
+phoneY2 = 170; //with case
+phoneZ = 7;
 
 
 phoneHolderWall = 2;
@@ -23,6 +23,19 @@ railExtra = 1;
 railRad = 2;
 
 railExtr = 100; //fixed extrusion of rails in clamp
+
+module pattern(rad=10,thickness=2, dist=50, heigth=40, cnt=5)
+{
+  for(obj=[0:cnt-1])
+    translate([dist*obj,0,0])
+    hull()
+    {
+      cylinder(r=rad,h=thickness);
+      translate([0,heigth-rad*2,0]) cylinder(r=rad,h=thickness);
+    }
+}
+
+/* pattern(); */
 
 module rail()
 {
@@ -92,20 +105,29 @@ module CouchPotatoClamp()
 }
 /* A(); */
 
-module phoneHolder()
+module phoneHolder(patternOn=false)
 {
   difference() {
     cube([phoneHolderX,phoneY2+phoneHolderWall*2,phoneZ+phoneHolderWall]);
-    translate([phoneHolderWall,phoneHolderWall+(phoneY2-phoneYDispl)/2,phoneHolderWall]) cube([phoneHolderX-phoneHolderWall,phoneYDispl,phoneZ]);
+    translate([phoneHolderWall,phoneHolderWall+(phoneY2-phoneY)/2,phoneHolderWall]) cube([phoneHolderX-phoneHolderWall,phoneY,phoneZ]);
 
-    translate([phoneHolderWall,phoneHolderWall+(phoneY2-phoneYDispl)/2,phoneHolderWall+phoneZ/2]) rotate([0,90,0])
+    translate([phoneHolderWall,phoneHolderWall+(phoneY2-phoneY)/2,phoneHolderWall+phoneZ/2]) rotate([0,90,0])
       scale([1.1,0.8,1]) cylinder(r=phoneZ/2,h=phoneHolderX-phoneHolderWall);
-    translate([phoneHolderWall,(phoneY2+phoneHolderWall*2)-phoneHolderWall-(phoneY2-phoneYDispl)/2,phoneHolderWall+phoneZ/2]) rotate([0,90,0])
+    translate([phoneHolderWall,(phoneY2+phoneHolderWall*2)-phoneHolderWall-(phoneY2-phoneY)/2,phoneHolderWall+phoneZ/2]) rotate([0,90,0])
       scale([1.1,0.8,1]) cylinder(r=phoneZ/2,h=phoneHolderX-phoneHolderWall);
+
+    if(patternOn == true)
+    {
+      translate([25,25,0]) pattern(rad=6,thickness=phoneHolderWall, dist=25, heigth=140, cnt=3);
+    }
   }
   translate([-holderThickness/2-railExtra,0,0]) rail();
 }
 
+/* #translate([55,phoneHolderWall,phoneHolderWall]) cube([100,169,5]); */
+
 /* rail(); */
-/* translate([10.2,10,(holderZ-phoneZ-phoneHolderWall)/2+0.1]) phoneHolder(); */
+/* translate([10.2,10,(holderZ-phoneZ-phoneHolderWall)/2+0.1])  */
+/* phoneHolder(); */
+phoneHolder(patternOn=true);
 /* translate([-holderX,10,0]) CouchPotatoClamp(); */

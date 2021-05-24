@@ -6,7 +6,12 @@ This is a profile which can be placed on the couch. It has rails on the side to 
 
 The current phone holder is for a BQ Aquaris X with slim case.
 
+![](001.jpg)
+
+![](002.jpg)
+
 ![](couchpotato.png)
+
 
 # LICENSE
 
