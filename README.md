@@ -10,6 +10,10 @@ The current phone holder is for a BQ Aquaris X with slim case.
 
 ![](002.jpg)
 
+![](003.jpg)
+
+![](004.jpg)
+
 ![](couchpotato.png)
 
 
