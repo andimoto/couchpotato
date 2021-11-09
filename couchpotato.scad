@@ -17,6 +17,9 @@ phoneY2 = 170; //with case
 phoneZ = 7;
 
 
+extensionLen = 150;
+extensionY = 50;
+
 phoneHolderWall = 2;
 
 railExtra = 1;
@@ -36,11 +39,11 @@ module pattern(rad=10,thickness=2, dist=50, heigth=40, cnt=5)
 }
 
 /* pattern(); */
-
-module rail()
+/* phoneY2+phoneHolderWall*2 */
+module rail(lenY=50)
 {
-  cube([holderThickness/2+railExtra,phoneY2+phoneHolderWall*2,3]);
-  translate([railRad,0,3]) rotate([-90,0,0]) cylinder(r=railRad,h=phoneY2+phoneHolderWall*2);
+  cube([holderThickness/2+railExtra,lenY,3]);
+  translate([railRad,0,3]) rotate([-90,0,0]) cylinder(r=railRad,h=lenY);
 }
 
 module U()
@@ -67,7 +70,7 @@ module A()
     moveRailX = holderX-holderThickness/2-railExtra;
     moveRailScale = 0;//(holderThickness/2+railExtra)*0.05;
     translate([moveRailX-moveRailScale,0,(holderZ)/2])
-      resize([0,100,0]) scale([1.05,1,1.05]) rail();
+      resize([0,100,0]) scale([1.05,1,1.05]) rail( phoneY2+phoneHolderWall*2);
   }
 }
 
@@ -121,13 +124,33 @@ module phoneHolder(patternOn=false)
       translate([25,25,0]) pattern(rad=6,thickness=phoneHolderWall, dist=25, heigth=140, cnt=3);
     }
   }
-  translate([-holderThickness/2-railExtra,0,0]) rail();
+  translate([-holderThickness/2-railExtra,0,0]) rail( phoneY2+phoneHolderWall*2);
+}
+
+module extension(bottom=true)
+{
+  rail();
+  difference()
+  {
+    union()
+    {
+      translate([holderThickness/2+railExtra,0,0]) cube([extensionLen,extensionY,11]);
+    }
+    translate([20,12.5,0]) pattern(rad=8,thickness=11, dist=28, heigth=40, cnt=5);
+    if(bottom == true)
+    {
+      translate([extensionLen,-2,3]) scale([1.05,1,1.05]) rail();
+    }else{
+      translate([extensionLen,0,3]) scale([1.05,1,1.05]) rail();
+    }
+  }
 }
 
 /* #translate([55,phoneHolderWall,phoneHolderWall]) cube([100,169,5]); */
-
+extension(false);
+/* #translate([30,10,0]) pattern(rad=5,thickness=10, dist=25, heigth=40, cnt=5); */
 /* rail(); */
 /* translate([10.2,10,(holderZ-phoneZ-phoneHolderWall)/2+0.1])  */
 /* phoneHolder(); */
-phoneHolder(patternOn=true);
+/* phoneHolder(patternOn=true); */
 /* translate([-holderX,10,0]) CouchPotatoClamp(); */
