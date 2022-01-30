@@ -189,6 +189,14 @@ module extension(bottom=true)
   }
 }
 
+
+module handPart()
+{
+  
+
+}
+
+
 /* #translate([55,phoneHolderWall,phoneHolderWall]) cube([100,169,5]); */
 /* extension(false); */
 /* #translate([30,10,0]) pattern(rad=5,thickness=10, dist=25, heigth=40, cnt=5); */
