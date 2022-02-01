@@ -39,9 +39,9 @@ slideZshift = 0; */
 /* PocketBook InkPad Color or InkPad 3 with OrigamiCase */
 phoneHolderX = 70;
 phoneY = 136;
-phoneY2 = 142; //with case
-phoneZ = 13;
-phoneHolderWall = 4;
+phoneY2 = 138; //with case
+phoneZ = 12;
+phoneHolderWall = 6;
 
 patternOn = true;
 cutoutCount = 3;
@@ -80,8 +80,7 @@ module pattern(rad=10,thickness=2, dist=50, heigth=40, cnt=5)
     }
 }
 
-/* pattern(); */
-/* phoneY2+phoneHolderWall*2 */
+
 module rail(lenY=50)
 {
   cube([holderThickness/2+railExtra,lenY,3]);
@@ -153,9 +152,9 @@ module CouchPotatoClamp()
 module deviceHolder()
 {
   difference() {
-    cube([phoneHolderX,phoneY2+phoneHolderWall*2,phoneZ+phoneHolderWall]);
+    cube([phoneHolderX,phoneY2+phoneHolderWall*2,phoneZ+backWall]);
 
-    translate([borderWall,phoneHolderWall+(phoneY2-phoneY)/2,backWall]) cube([phoneHolderX-borderWall+extra,phoneY,backWall+phoneZ+extra]);
+    translate([borderWall,phoneHolderWall+(phoneY2-phoneY)/2,backWall]) cube([phoneHolderX-borderWall+extra,phoneY,phoneZ+extra]);
 
     translate([borderWall,phoneHolderWall+(phoneY2-phoneY)/2,backWall+phoneZ/2+slideZshift]) rotate([0,90,0])
       scale([1.1,0.8,1]) cylinder(r=phoneZ/2,h=phoneHolderX-borderWall+extra);
