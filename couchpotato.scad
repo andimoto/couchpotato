@@ -1,3 +1,5 @@
+include <Chamfer.scad>;
+
 $fn = 50;
 
 holderX = 120;
@@ -189,13 +191,26 @@ module extension(bottom=true)
   }
 }
 
-
-module handPart()
+handHolderX = 20;
+handHolderY = 40;
+handHolderRadius = 4;
+handHolderZoffset = 1;  //endstop for rail (offset from the bottom)
+module handholder()
 {
-  
-
+  difference()
+  {
+    translate([handHolderRadius,handHolderRadius,0])
+    minkowski()
+    {
+      tempHeight = phoneY2+phoneHolderWall*2+1;
+      chamferCylinder(tempHeight,r=handHolderRadius);
+      cube([handHolderX-handHolderRadius*2,handHolderY-handHolderRadius*2,0.000000000001]);
+    }
+    tempHeight = phoneY2+phoneHolderWall*2;
+    translate([holderThickness/2+railExtra,030,tempHeight+1]) rotate([90,180,0]) rail(tempHeight);
+  }
 }
-
+/* handholder(); */
 
 /* #translate([55,phoneHolderWall,phoneHolderWall]) cube([100,169,5]); */
 /* extension(false); */
@@ -203,6 +218,6 @@ module handPart()
 /* rail(); */
 /* translate([10.2,10,(holderZ-phoneZ-phoneHolderWall)/2+0.1])  */
 
-/* deviceHolder(); */
 deviceHolder();
+/* deviceHolder(); */
 /* translate([-holderX,10,0]) CouchPotatoClamp(); */
