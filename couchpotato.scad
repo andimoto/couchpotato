@@ -223,11 +223,11 @@ module couchPotatoHandHandle()
       scale([1.05,1,1.05]) rail(tempHeight,innerRail=true);
   }
 }
-couchPotatoHandHandle();
+/* couchPotatoHandHandle(); */
 
 
 /* extension(false); */
 
-/* deviceHolder(); */
+deviceHolder();
 
 /* translate([-holderX,10,0]) CouchPotatoClamp(); */
