@@ -1,4 +1,4 @@
-include <Chamfer.scad>;
+include <Chamfers-for-OpenSCAD/Chamfer.scad>;
 
 $fn = 50;
 
@@ -7,7 +7,7 @@ holderThickness = 10;
 holderZ = 20;
 
 /* Aquaris X */
-/* phoneHolderX = 80;
+phoneHolderX = 80;
 phoneY = 69;
 phoneY2 = 78; //with case
 phoneZ = 9;
@@ -19,7 +19,7 @@ cutoutHeight = 50;
 cutoutRadius = 5;
 cutoutDistance = 18;
 cutoutXshift = 7;
-slideZshift = 0; */
+slideZshift = 0;
 
 /* Samsung Galaxy Tab2 */
 /* phoneHolderX = 140;
@@ -37,11 +37,11 @@ cutoutXshift = 12;
 slideZshift = 0; */
 
 /* PocketBook InkPad Color or InkPad 3 with OrigamiCase */
-phoneHolderX = 70;
+/* phoneHolderX = 70;
 phoneY = 136;
 phoneY2 = 138; //with case
-phoneZ = 12;
-phoneHolderWall = 6;
+phoneZ = 13;
+phoneHolderWall = 3;
 
 patternOn = true;
 cutoutCount = 3;
@@ -49,13 +49,13 @@ cutoutHeight = 110;
 cutoutRadius = 6;
 cutoutDistance = 20;
 cutoutXshift = 7;
-slideZshift = 1;
+slideZshift = 1; */
 
 
 extensionLen = 150;
 extensionY = 50;
 
-
+lockingExtrusionHeight = 4;
 
 borderWall = 2;
 backWall = 2;
@@ -152,14 +152,20 @@ module CouchPotatoClamp()
 module deviceHolder()
 {
   difference() {
-    cube([phoneHolderX,phoneY2+phoneHolderWall*2,phoneZ+backWall]);
+    cube([phoneHolderX,phoneY2+phoneHolderWall*2,phoneZ+backWall+lockingExtrusionHeight]);
 
-    translate([borderWall,phoneHolderWall+(phoneY2-phoneY)/2,backWall]) cube([phoneHolderX-borderWall+extra,phoneY,phoneZ+extra]);
+    hull()
+    {
+    translate([borderWall,phoneHolderWall,backWall])
+      cube([phoneHolderX-borderWall+extra,phoneY2,phoneZ+extra]);
+    translate([borderWall,phoneHolderWall+lockingExtrusionHeight,backWall])
+      cube([phoneHolderX-borderWall+extra,phoneY2-lockingExtrusionHeight*2,phoneZ+lockingExtrusionHeight+extra]);
+    }
 
-    translate([borderWall,phoneHolderWall+(phoneY2-phoneY)/2,backWall+phoneZ/2+slideZshift]) rotate([0,90,0])
+    /* translate([borderWall,phoneHolderWall+(phoneY2-phoneY)/2,backWall+phoneZ/2+slideZshift]) rotate([0,90,0])
       scale([1.1,0.8,1]) cylinder(r=phoneZ/2,h=phoneHolderX-borderWall+extra);
     translate([borderWall,(phoneY2+phoneHolderWall*2)-phoneHolderWall-(phoneY2-phoneY)/2,backWall+phoneZ/2+slideZshift]) rotate([0,90,0])
-      scale([1.1,0.8,1]) cylinder(r=phoneZ/2,h=phoneHolderX-borderWall+extra);
+      scale([1.1,0.8,1]) cylinder(r=phoneZ/2,h=phoneHolderX-borderWall+extra); */
 
 
     if(patternOn == true)
