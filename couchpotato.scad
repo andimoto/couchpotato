@@ -35,17 +35,17 @@ cutoutXshift = 12;
 slideZshift = 0; */
 
 /* PocketBook InkPad Color or InkPad 3 with OrigamiCase */
-phoneHolderX = 70;
+phoneHolderX = 100;
 phoneY = 142; //with case
 phoneZ = 13;
 phoneHolderWall = 3;
 
 patternOn = true;
-cutoutCount = 3;
+cutoutCount = 4;
 cutoutHeight = 110;
 cutoutRadius = 6;
-cutoutDistance = 20;
-cutoutXshift = 7;
+cutoutDistance = 22;
+cutoutXshift = 8;
 slideZshift = 1;
 
 
